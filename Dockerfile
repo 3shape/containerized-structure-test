@@ -15,4 +15,6 @@ RUN curl -LO https://storage.googleapis.com/container-structure-test/v1.8.0/cont
     && chmod +x container-structure-test-linux-amd64 \ 
     && mv container-structure-test-linux-amd64 /usr/local/bin/container-structure-test
 
+VOLUME /configs
+
 ENTRYPOINT [ "/usr/local/bin/container-structure-test" ]
