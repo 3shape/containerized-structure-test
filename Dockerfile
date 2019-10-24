@@ -11,7 +11,7 @@ RUN update-ca-certificates
 
 RUN curl -sL https://get.docker.com/ | sh
 
-RUN curl -LO https://storage.googleapis.com/container-structure-test/latest/container-structure-test-linux-amd64 \
+RUN curl -LO https://storage.googleapis.com/container-structure-test/v1.8.0/container-structure-test-linux-amd64 \
     && chmod +x container-structure-test-linux-amd64 \ 
     && mv container-structure-test-linux-amd64 /usr/local/bin/container-structure-test
 
