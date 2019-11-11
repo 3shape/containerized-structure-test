@@ -6,16 +6,24 @@ Purpose is to make it easy to use Docker sockets to grab local images for testin
 
 ## Example (using PowerShell)
 
-1. Get an image to test and the container version of this Dockerfile.
+- Get an image to test and the container version of this Dockerfile.
+
 ```powershell
 docker pull ubuntu:latest
-docker pull rasmusjelsgaard/containerized-structure-test
+docker pull 3shape/containerized-structure-test
 ```
 
-2. Map your local docker daemon into the structure container and run tests against ubuntu:latest. In this example the structure tests are defined in a file called gc-config.yml that resides in the same directory as where the command is being executed.
+- Map your local docker daemon into the structure container and run tests against ubuntu:latest. In this example the structure tests are defined in a file called gc-config.yml that resides in the same directory as where the command is being executed.
 
+
+### Testing with Linux
+
+```powershell
+docker run --rm -v ${PWD}:/configs -v /var/run/docker.sock:/var/run/docker.sock containerized-structure-test test -c /configs/gc-linux-config.yml -i ubuntu:latest
 ```
-docker run  -it -v ${PWD}:/configs -v /var/run/docker.sock:/var/run/docker.sock containerized-structure-test test -c /configs/gc-config.yml -i ubuntu:latest
+
+### Testing with Windows
+
+```powershell
+docker run --rm -v ${PWD}:C:/configs -v \\.\pipe\docker_engine:\\.\pipe\docker_engine going test -c /configs/gc-windows-config.yml -i mcr.microsoft.com/windows/nanoserver:1809
 ```
-
-
