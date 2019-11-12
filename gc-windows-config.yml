@@ -1,0 +1,10 @@
+schemaVersion: "2.0.0"
+
+commandTests:
+  - name: "say hello world"
+    command: "cmd"
+    args:
+      - /c
+      - echo hello world
+    exitCode: 0
+    expectedOutput: ["hello world"]
