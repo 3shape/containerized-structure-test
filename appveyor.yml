@@ -1,0 +1,16 @@
+image:
+  - Ubuntu
+  - Visual Studio 2019
+
+environment:
+  matrix:
+    - ARCH: amd64
+
+build_script:
+  - pwsh: ./build.ps1
+
+test_script:
+  - pwsh: ./test.ps1
+
+deploy_script:
+  - ps: ./deploy.ps1
