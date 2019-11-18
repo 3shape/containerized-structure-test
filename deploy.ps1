@@ -63,23 +63,23 @@ if ($isWindows) {
 
   if ($env:ARCH -eq "amd64") {
     # Create manifest on Windows image as it is slower then Linux
-    docker -D manifest create "$($image):$env:APPVEYOR_REPO_TAG_NAME" `
-      "$($image):linux-amd64-$env:APPVEYOR_REPO_TAG_NAME" `
-      "$($image):windows-amd64-$env:APPVEYOR_REPO_TAG_NAME-1607" `
-      "$($image):windows-amd64-$env:APPVEYOR_REPO_TAG_NAME-1709" `
-      "$($image):windows-amd64-$env:APPVEYOR_REPO_TAG_NAME-1803" `
-      "$($image):windows-amd64-$env:APPVEYOR_REPO_TAG_NAME" `
-      "$($image):windows-amd64-$env:APPVEYOR_REPO_TAG_NAME-1903"
-    docker manifest push "$($image):$env:APPVEYOR_REPO_TAG_NAME"
+    docker manifest create "${image}:$env:APPVEYOR_REPO_TAG_NAME" `
+      "${image}:linux-amd64-$env:APPVEYOR_REPO_TAG_NAME" `
+      "${image}:windows-amd64-$env:APPVEYOR_REPO_TAG_NAME-1607" `
+      "${image}:windows-amd64-$env:APPVEYOR_REPO_TAG_NAME-1709" `
+      "${image}:windows-amd64-$env:APPVEYOR_REPO_TAG_NAME-1803" `
+      "${image}:windows-amd64-$env:APPVEYOR_REPO_TAG_NAME" `
+      "${image}:windows-amd64-$env:APPVEYOR_REPO_TAG_NAME-1903"
+    docker manifest push "${image}:$env:APPVEYOR_REPO_TAG_NAME"
 
-    Write-Host "Pushing manifest $($image):latest"
-    docker -D manifest create "$($image):latest" `
-      "$($image):linux-amd64-$env:APPVEYOR_REPO_TAG_NAME" `
-      "$($image):windows-amd64-$env:APPVEYOR_REPO_TAG_NAME-1607" `
-      "$($image):windows-amd64-$env:APPVEYOR_REPO_TAG_NAME-1709" `
-      "$($image):windows-amd64-$env:APPVEYOR_REPO_TAG_NAME-1803" `
-      "$($image):windows-amd64-$env:APPVEYOR_REPO_TAG_NAME" `
-      "$($image):windows-amd64-$env:APPVEYOR_REPO_TAG_NAME-1903"
-    docker manifest push "$($image):latest"
+    Write-Host "Pushing manifest ${image}:latest"
+    docker manifest create "${image}:latest" `
+      "${image}:linux-amd64-$env:APPVEYOR_REPO_TAG_NAME" `
+      "${image}:windows-amd64-$env:APPVEYOR_REPO_TAG_NAME-1607" `
+      "${image}:windows-amd64-$env:APPVEYOR_REPO_TAG_NAME-1709" `
+      "${image}:windows-amd64-$env:APPVEYOR_REPO_TAG_NAME-1803" `
+      "${image}:windows-amd64-$env:APPVEYOR_REPO_TAG_NAME" `
+      "${image}:windows-amd64-$env:APPVEYOR_REPO_TAG_NAME-1903"
+    docker manifest push "${image}:latest"
   }
 }
