@@ -60,10 +60,9 @@ if ($isWindows) {
     -s mcr.microsoft.com/windows/nanoserver:1809 `
     -t "${image}:$os-$env:ARCH-$env:APPVEYOR_REPO_TAG_NAME-1903" `
     -b mcr.microsoft.com/windows/nanoserver:1903
-} else {
-  # Linux
+
   if ($env:ARCH -eq "amd64") {
-    # The last in the build matrix
+    # Create manifest on Windows image as it is slower then Linux
     docker -D manifest create "$($image):$env:APPVEYOR_REPO_TAG_NAME" `
       "$($image):linux-amd64-$env:APPVEYOR_REPO_TAG_NAME" `
       "$($image):windows-amd64-$env:APPVEYOR_REPO_TAG_NAME-1607" `
