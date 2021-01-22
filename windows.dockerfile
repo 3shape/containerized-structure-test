@@ -1,5 +1,5 @@
 # escape=`
-FROM golang:1.12-windowsservercore-1809 as build
+FROM golang:1.15-windowsservercore-1809 as build
 
 ENV GOOS=windows `
     GOARCH=amd64 `
