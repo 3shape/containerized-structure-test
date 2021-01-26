@@ -4,7 +4,7 @@ $ErrorActionPreference = 'Stop'
 
 if (! (Test-Path Env:\APPVEYOR_REPO_TAG_NAME)) {
   Write-Host "No version tag detected. Skip publishing."
-  exit 0
+  # exit 0
 }
 
 Write-Host Starting deploy
@@ -13,23 +13,23 @@ $image = '3shape/containerized-structure-test'
 $auth =[System.Text.Encoding]::UTF8.GetBytes("$($env:DOCKER_USER):$($env:DOCKER_PASS)")
 $auth64 = [Convert]::ToBase64String($auth)
 
-if (!(Test-Path ~/.docker)) { mkdir ~/.docker }
+# if (!(Test-Path ~/.docker)) { mkdir ~/.docker }
 
-@"
-{
-  "auths": {
-    "https://index.docker.io/v1/": {
-      "auth": "$auth64"
-    }
-  },
-  "experimental": "enabled"
-}
-"@ | Out-File -Encoding Ascii ~/.docker/config.json
+# @"
+# {
+#   "auths": {
+#     "https://index.docker.io/v1/": {
+#       "auth": "$auth64"
+#     }
+#   },
+#   "experimental": "enabled"
+# }
+# "@ | Out-File -Encoding Ascii ~/.docker/config.json
 
 $os = If ($isWindows) {'windows'} Else {'linux'}
 
 docker tag containertest "${image}:$os-$env:ARCH-$env:APPVEYOR_REPO_TAG_NAME"
-docker push "${image}:$os-$env:ARCH-$env:APPVEYOR_REPO_TAG_NAME"
+# docker push "${image}:$os-$env:ARCH-$env:APPVEYOR_REPO_TAG_NAME"
 
 if ($isWindows) {
   Write-Host "Rebasing image to produce 2016/1607 variant"
@@ -78,7 +78,7 @@ if ($isWindows) {
       "${image}:windows-amd64-$env:APPVEYOR_REPO_TAG_NAME" `
       "${image}:windows-amd64-$env:APPVEYOR_REPO_TAG_NAME-1903" `
       "${image}:windows-amd64-$env:APPVEYOR_REPO_TAG_NAME-2004"
-    docker manifest push "${image}:$env:APPVEYOR_REPO_TAG_NAME"
+    # docker manifest push "${image}:$env:APPVEYOR_REPO_TAG_NAME"
 
     Write-Host "Pushing manifest ${image}:latest"
     docker manifest create "${image}:latest" `
@@ -89,6 +89,6 @@ if ($isWindows) {
       "${image}:windows-amd64-$env:APPVEYOR_REPO_TAG_NAME" `
       "${image}:windows-amd64-$env:APPVEYOR_REPO_TAG_NAME-1903" `
       "${image}:windows-amd64-$env:APPVEYOR_REPO_TAG_NAME-2004"
-    docker manifest push "${image}:latest"
+    # docker manifest push "${image}:latest"
   }
 }
