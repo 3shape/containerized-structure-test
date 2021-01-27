@@ -9,7 +9,7 @@ RUN go get github.com/sirupsen/logrus; `
     go get github.com/GoogleContainerTools/container-structure-test/cmd/container-structure-test/app; `
     go build ./src/github.com/GoogleContainerTools/container-structure-test/cmd/container-structure-test
 
-FROM mcr.microsoft.com/windows/nanoserver:1809
+FROM stefanscherer/nanoserver:1809
 
 COPY --from=build c:/gopath/container-structure-test.exe ./container-structure-test.exe
 
