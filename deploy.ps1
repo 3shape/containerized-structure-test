@@ -33,7 +33,7 @@ docker push "${image}:$os-$env:ARCH-$env:APPVEYOR_REPO_TAG_NAME"
 
 if ($isWindows) {
   Write-Host "Rebasing image to produce another OS variants"
-  npm install -g rebase-docker-image
+  npm install -g rebase-docker-image --loglevel=error
   npm list -g --depth=0
 
   Write-Host "Rebasing image to produce 1803 variant"
